@@ -25,8 +25,3 @@ COPY . .
 
 # place executables in the environment at the front of the path
 ENV PATH="/app/.venv/bin:$PATH"
-
-# CMD ["fastapi", "dev", "--host", "0.0.0.0", "--port", "80"]
-
-# to build: uv sync && docker image build . -t jw-img
-# to run: docker container run --name jw --rm -d -p 8000:80 jw-img fastapi dev --host 0.0.0.0 --port 80
