@@ -136,28 +136,83 @@ result = await graph.ainvoke(
 
 ## Creating Datasets
 
-Datasets are managed via LangSmith. See `datasets/candidate_cv.py` for the pattern:
+Datasets are managed via LangSmith and stored remotely for use in evaluations. The `datasets/` directory contains scripts for populating datasets from local files.
 
-1. Place sample data in `notebooks/data/`
-2. Create examples with metadata IDs for deduplication
-3. Run:
+### How It Works
+
+1. **Source Data** — Place raw data files (e.g., `.txt` files) in `notebooks/data/`
+2. **Example Creation** — Each file is converted to a LangSmith `ExampleCreate` with inputs and metadata
+3. **Deduplication** — Examples include a metadata `id` field; the utility skips examples that already exist in the dataset
+4. **Upload** — New examples are created in LangSmith via the API
+
+### Running Dataset Scripts
 
 ```bash
 uv run python -m datasets.candidate_cv
 ```
 
+### Adding New Datasets
+
+Create a new module in `datasets/` following the pattern in `datasets/candidate_cv.py`:
+
+```python
+from langsmith.schemas import ExampleCreate
+from datasets.utils import create_or_get_dataset, add_new_examples
+
+examples = [
+    ExampleCreate(
+        inputs={"your_input_field": data},
+        metadata={"id": unique_id},  # Required for deduplication
+    )
+]
+
+ds = create_or_get_dataset("your_dataset_name", CLIENT)
+add_new_examples(ds.name, examples, CLIENT)
+```
+
 ## Running Evaluations
 
-Evaluations use LangSmith datasets with openevals LLM-as-judge. See `evals/candidate_scores.py`:
+Evaluations run your graph against a LangSmith dataset and score outputs using LLM-as-judge. Results are tracked as experiments in LangSmith for comparison across runs.
+
+### How It Works
+
+1. **Target Function** — Wraps your compiled graph to accept dataset inputs and return outputs
+2. **Evaluator** — An LLM-as-judge (via openevals) scores each output against criteria defined in `prompts/evals/`
+3. **Experiment** — LangSmith records all inputs, outputs, and scores with metadata for analysis
+
+### Running Evaluation Scripts
 
 ```bash
 uv run python -m evals.candidate_scores
 ```
 
-This runs:
-- Target function against dataset examples
-- LLM-as-judge evaluator for correctness scoring
-- Results tracked in LangSmith experiments
+### Adding New Evaluations
+
+Create a new module in `evals/` following the pattern in `evals/candidate_scores.py`:
+
+```python
+from langsmith.evaluation import aevaluate
+from openevals.llm import create_llm_as_judge
+
+async def target(inputs: dict) -> dict:
+    graph = compile_your_graph()
+    result = await graph.ainvoke(inputs, context={...})
+    return {"result": result}
+
+evaluator = create_llm_as_judge(
+    prompt=YOUR_EVAL_PROMPT,
+    feedback_key="correctness",
+    model="openai:o3-mini",
+)
+
+await aevaluate(
+    target,
+    data=dataset,
+    evaluators=[evaluator],
+    experiment_prefix="your-experiment",
+    metadata={"model": "gpt-4o"},
+)
+```
 
 ## Available Models
 
