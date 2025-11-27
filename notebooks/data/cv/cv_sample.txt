@@ -1,0 +1,48 @@
+Computer Science Resume Example
+Name
+1255 University of Utah Circle, Las Vegas, NV 84112
+(801) 581-6186
+name@email.com
+Linked in: www.linkedin.com/in/name
+Education
+Ensign College Associate of Applied Science Computer Science GPA: 3.55 Relevant Skills
+Salt Lake City, UT
+Graduation: May 20xx
+Programming Languages
+C/C++ C# Java Javascript
+Swift HTML MySQL Python
+Programming Environments
+Visual Studio Eclipse Unity Xamarin Studio
+Emacs TextWrangler Xcode Sublime 2
+Work Environments
+OSX Windows Linux iOS
+Android Unix Terminal
+Software
+Adobe Photoshop Adobe Indesign Google Drive Dropbox
+Microsoft Office iWorks Google Calendar Mozilla Thunderbird
+Relevant Courses
+Software Practice I/II Artificial Intelligence Computer Graphics Computer Systems
+Cyber Ethics Differential Equations Probability and Stats. Discrete Mathematics
+Technical Projects
+Class Project: Networked Spreadsheet
+ Created a Google Spreadsheet like program with a client in C# and server in C++
+ Worked on a team of 4 to design a communication protocol, create, and test the program
+ Server Leader: designed the C++ server for asynchronous communication
+Class Project: Custom Image Encoder/Decoder with FFMPEG
+ Learned how images are stored electronically and to draw images by pixel manipulation
+ Gained experience working with a large open source codebase with poor documentation
+ Linked into FFMPEG libraries and called methods to create a program that makes videos
+Class Project: Problem Solving Search
+ Explored solving the Towers of Hanoi game with multiple search algorithms
+ Implemented a tree structure that saved time and memory usage
+ Measured efficiency of algorithms by number of nodes traversed by algorithms
+Relevant Experience
+Undergraduate Student Advisory Committee (Committee Chair, Ensign College, SLC, 20xx -
+Present)
+ Host the School of Computing’s open house How to be a Computer Science Student
+ Interview faculty candidates about areas of expertise and evaluates ability to teach
+Association for Computing Machinery (University of Utah, SLC, 20xx - Present)
+ Participate in Team Coding Competitions to quickly solve problems
+ Meet with programmers to talk about working in industry or research
+Resident Advisor (Housing & Residential Education Office, SLC, 20xx-20xx)
+ Worked with a team of 22 people to help over 300 freshmen adjust to college

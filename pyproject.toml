@@ -1,0 +1,33 @@
+[project]
+name = "langgraph-template"
+version = "0.1.0"
+requires-python = "==3.11.*"
+dependencies = [
+    "chromadb>=1.0.15",
+    "dotenv>=0.9.9",
+    "fastapi[standard]>=0.116.1",
+    "langchain-community>=0.3.27",
+    "langchain-core>=1.1.0",
+    "langchain-openai>=0.3.28",
+    "langgraph>=1.0.4",
+    "langsmith>=0.4.10",
+    "nest-asyncio>=1.6.0",
+    "openevals>=0.1.0",
+    "pydantic>=2.11.7",
+    "tqdm>=4.67.1",
+    "typing-extensions>=4.14.1",
+    "uvicorn>=0.35.0",
+]
+
+[dependency-groups]
+dev = [
+    "ipykernel>=6.30.0",
+    "ruff",
+]
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+select = ["W292"]
+fixable = ["W292"]
